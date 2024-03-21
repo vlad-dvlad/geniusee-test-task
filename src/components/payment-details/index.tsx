@@ -12,16 +12,16 @@ const PaymentDetails = () => {
         <Section title="Payment details">
         <input
           {...register("creditCard")}
-          className={cx("form__input")}
+          className={cx("form__input", { errors: !!errors.creditCard })}
           placeholder="Credit card *"
         />
-        {errors.creditCard && <span>{`${errors.creditCard.message ?? ""}`}</span>}
+        {errors.creditCard && <span className={cx('form__error')}>{`${errors.creditCard.message ?? ""}`}</span>}
         <input
           {...register("cvv2")}
-          className={cx("form__input")}
+          className={cx("form__input", { errors: !!errors.cvv2 })}
           placeholder="CVV2 *"
         />
-        {errors.cvv2 && <span>{`${errors.cvv2.message ?? ""}`}</span>}
+        {errors.cvv2 && <span className={cx('form__error')}>{`${errors.cvv2.message ?? ""}`}</span>}
         <div className={cx("form__agree")}>
           <input
             type="checkbox"
@@ -30,7 +30,7 @@ const PaymentDetails = () => {
           />
           <label htmlFor="agreeTerms">Agree with terms of use</label>
         </div>
-        {errors.agreeTerms && <span>{`${errors.agreeTerms.message ?? ""}`}</span>}
+        {errors.agreeTerms && <span className={cx('form__error')}>{`${errors.agreeTerms.message ?? ""}`}</span>}
       </Section>
     );
 };

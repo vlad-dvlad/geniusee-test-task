@@ -3,10 +3,13 @@
     &__select {
       padding: 10px 8px;
       border-radius: 5px;
-      border-color: #858383;
+      border: 1px solid #858383;
+      &.errors {
+        border: 1px solid  red;
+      }
     }
 
-    span {
+    &__error {
         color: red;
     }
   }

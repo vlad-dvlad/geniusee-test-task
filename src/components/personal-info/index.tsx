@@ -11,16 +11,16 @@ const PersonalInfo = () => {
         <Section title="Personal information">
         <input
           {...register("firstName")}
-          className={cx("form__input")}
+          className={cx("form__input", { errors: !!errors.firstName })}
           placeholder="Firts Name *"
         />
-        {errors.firstName && <span>{`${errors.firstName.message ?? ''}`}</span>}
+        {errors.firstName && <span className={cx('form__error')}>{`${errors.firstName.message ?? ''}`}</span>}
         <input
           {...register("lastName")}
-          className={cx("form__input")}
+          className={cx("form__input", { errors: !!errors.lastName })}
           placeholder="Last Name *"
         />
-        {errors.lastName && <span>{`${errors.lastName.message ?? ''}`}</span>}
+        {errors.lastName && <span className={cx('form__error')}>{`${errors.lastName.message ?? ''}`}</span>}
       </Section>
     );
 };

@@ -1,4 +1,4 @@
-import { Controller, useFieldArray, useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import Section from "../../shared/section";
 import styles from "./styles.module.scss";
 import classNames from "classnames/bind";
@@ -13,21 +13,14 @@ const ContactInfo = () => {
     formState: { errors },
   } = useFormContext();
 
-
-  const { fields } = useFieldArray({
-    control,
-    name: 'phNum',
-    rules: { minLength: 1, maxLength: 3}
-  })
-
   return (
     <Section title="Contact information">
       <input
         {...register("email")}
-        className={cx("form__input")}
+        className={cx("form__input", { errors: !!errors.email })}
         placeholder="Email *"
       />
-      {errors.email && <span>{`${errors.email.message ?? ""}`}</span>}
+      {errors.email && <span className={cx('form__error')}>{`${errors.email.message ?? ""}`}</span>}
       <Controller
         control={control}
         name="country"
@@ -35,7 +28,7 @@ const ContactInfo = () => {
           <select
             value={value}
             onChange={onChange}
-            className={cx("form__select")}
+            className={cx("form__select", { errors: !!errors.country })}
           >
             <option value={""}>Select Country *</option>
             {countries.map((country) => (
@@ -46,19 +39,31 @@ const ContactInfo = () => {
           </select>
         )}
       />
-      {fields.map((field, index) => (
-        <input
-            key={field.id}
-            {...register(`phNum.${index}.value`)}
+      {errors.country && <span className={cx('form__error')}>{`${errors.country.message ?? ""}`}</span>}
+      <input
+            {...register('phoneNums[0]')}
+            className={cx("form__input", { errors: !!errors.phoneNums })}
+
+            placeholder="Phone number 1"
         />
-    ))}
-      {errors.country && <span>{`${errors.country.message ?? ""}`}</span>}
+        <input
+            {...register('phoneNums[1]')}
+            className={cx("form__input", { errors: !!errors.phoneNums })}
+
+            placeholder="Phone number 2"
+        />
+        <input
+            {...register('phoneNums[2]')}
+            className={cx("form__input", { errors: !!errors.phoneNums })}
+            placeholder="Phone number 3"
+        />
+        {errors.phoneNums && <span className={cx('form__error')}>{`${errors.phoneNums.message ?? ""}`}</span>}
       <input
         {...register("address")}
-        className={cx("form__input")}
+        className={cx("form__input", { errors: !!errors.address })}
         placeholder="Adress *"
       />
-      {errors.address && <span>{`${errors.address.message ?? ""}`}</span>}
+      {errors.address && <span className={cx('form__error')}>{`${errors.address.message ?? ""}`}</span>}
     </Section>
   );
 };

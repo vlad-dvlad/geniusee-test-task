@@ -7,11 +7,9 @@ export const formSchema = yup.object({
   firstName: yup.string().required("First name is required"),
   lastName: yup.string().required("Last name is required"),
   email: yup.string().email("Invalid email"),
-  phoneNums: yup
-    .array()
-    .min(1, "Minimun 1 phone number")
-    .max(3, "Maximum 3 phone numbers")
-    .required(),
+  phoneNums: yup.array()
+  .min(1, 'At least 1 phone number is required')
+  .max(3, 'Maximum 3 phone numbers allowed').required(),
   country: yup
     .string()
     .oneOf(countriesShortNames, "Country is required")
