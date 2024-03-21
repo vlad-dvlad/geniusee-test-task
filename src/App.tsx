@@ -1,9 +1,10 @@
-import styles from './app.module.scss';
+import styles from "./app.module.scss";
+import FormMain from "./components/form-main";
 
 const App = () => {
   return (
     <div className={styles.app}>
-        App
+      <FormMain />
     </div>
   );
 };
